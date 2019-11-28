@@ -4,12 +4,11 @@ import React from 'react';
 import Modal1 from './modal';
 import PageSelect from './pageSelect';
 import { connect } from "react-redux";
-// import { addUser } from '../actions/adduser';
-// import { deleteUser } from '../actions/deleteuser';
-// import { updateUser } from '../actions/updateuser';
-// import { setUsers } from '../actions/setusers';
-// import { setUsersWithQuery } from '../actions/setuserswithquery';
-import {addUser, deleteUser, updateUser, setUsers, setUsersWithQuery} from '../actions/index';
+import { addUser } from '../actions/adduser';
+import { deleteUser } from '../actions/deleteuser';
+import { updateUser } from '../actions/updateuser';
+import { setUsers } from '../actions/setusers';
+import { setUsersWithQuery } from '../actions/setuserswithquery';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:3001');
 
@@ -288,9 +287,9 @@ handleSearch = debounce((value) => {
       },
     };
     const tableStyle = {
-      marginLeft: '25%',
-      marginRight: '25%',
-      width: '50%',
+      marginLeft: '20%',
+      marginRight: '20%',
+      width: '60%',
     }
     const columns = this.columns.map(col => {
       if (!col.editable) {

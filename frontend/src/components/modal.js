@@ -24,7 +24,9 @@ handleCancel = () => {
   render() {
     const { visible, loading } = this.state;
     const modalStyle = {
-        width: '50%'
+        width: '50%',
+        paddingLeft: '0%',
+        paddingRigth: '0%'
     }
     return (
       <div>

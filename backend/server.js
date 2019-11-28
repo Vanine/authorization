@@ -6,8 +6,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Cors = require('cors');
-const redis = require('redis');
-const client = redis.createClient(); 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(Cors());
@@ -24,16 +22,11 @@ mongoose.connect('mongodb://localhost:27017/mydb', {useNewUrlParser: true}, func
     console.log("Connected to Mongo");
     });
 
-client.on('connect', () => {
-  console.log('Connected to Redis');
-})
+
 require('./config/passport')(passport);
 var connections = [];
 io.on('connection', (socket) => {
   connections.push(socket);
-  client.hmset(socket.id, socket, () => {
-    console.log('qcec');
-  });
   console.log(`Socket ${socket.id} connected`);
   socket.on('deleteUser', function(data, cb) {
     console.log('deleteUser: ', data);
@@ -52,9 +45,6 @@ io.on('connection', (socket) => {
   })
   socket.on('disconnect', () => {
     console.log(`Socket ${socket.id} disconnected`);
-    client.del(socket.id, () => {
-      console.log("jnjec")
-    })
     connections.splice(connections.indexOf(socket), 1);
   })
 })
